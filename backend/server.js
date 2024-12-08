@@ -25,9 +25,24 @@ app.use("/api/users", userRoutes);
 
 app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
+app.get("/socket.io/", (req, res) => {
+  res.json({ message: "This route is CORS-enabled" });
+});
+
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
   //this is the path to our index.html file
+});
+
+server.on("error", (error) => {
+  if (error.code === "EADDRINUSE") {
+    console.error(
+      `Port ${PORT} is already in use. Please choose a different port.`
+    );
+  } else {
+    console.error("Server error:", error);
+  }
+  process.exit(1);
 });
 
 server.listen(PORT, () => {
