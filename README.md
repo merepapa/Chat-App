@@ -11,14 +11,16 @@ JWT_SECRET=...
 NODE_ENV=...
 ```
 
-### Build the app
+### Run backend
 
 ```shell
-npm run build
+cd backend
+node server.js
 ```
 
-### Start the app
+### Run frontend
 
 ```shell
-npm start
+cd frontend
+npm run dev
 ```
